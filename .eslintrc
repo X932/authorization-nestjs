@@ -25,7 +25,7 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "internal", "external", "sibling", "parent"]
+        "groups": ["sibling", "builtin", "internal", "external", "parent"]
       }
     ],
     "spaced-comment": ["warn", "always"],
