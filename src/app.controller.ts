@@ -1,4 +1,3 @@
-import { AppService } from './app.service';
 import {
   Controller,
   Get,
@@ -6,6 +5,7 @@ import {
   Query,
   DefaultValuePipe,
 } from '@nestjs/common';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {

@@ -1,7 +1,7 @@
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { IUser, ResponseWrapper } from './users.model';
 import { UsersRoutes } from './users.routes';
 import { UsersService } from './users.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
 
 @Controller(UsersRoutes.Main)
 export class UsersController {
