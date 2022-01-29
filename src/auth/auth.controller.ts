@@ -8,7 +8,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post(AuthRoutes.SignUp)
-  async signUp(@Body() user: AuthenticationDto) {
+  signUp(@Body() user: AuthenticationDto) {
     this.authService.signUp(user);
   }
 
