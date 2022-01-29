@@ -9,4 +9,8 @@ export const ResponseStatuses = {
     code: HttpStatus.OK,
     description: 'Successfully',
   },
+  BAD_REQUEST: {
+    code: HttpStatus.BAD_REQUEST,
+    description: 'Bad request',
+  },
 };
