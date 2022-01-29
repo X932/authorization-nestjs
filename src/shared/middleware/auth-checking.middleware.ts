@@ -5,7 +5,7 @@ import { ResponseStatuses } from '../constants/response-statuses';
 @Injectable()
 export class AuthCheckingMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    if (!req.headers.authorization.trim()) {
+    if (!req.headers.authorization?.trim()) {
       throw new HttpException(
         { message: ResponseStatuses.UNAUTHORIZED.description },
         ResponseStatuses.UNAUTHORIZED.code,
