@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { IUser } from './users.model';
+import { IUser } from './auth.model';
 
 @Injectable()
-export class UsersService {
+export class AuthService {
   private users: IUser[] = [];
 
-  public createUpdateUser(user: IUser) {
+  public signUp(user: IUser) {
     this.users.push(user);
   }
 
-  public getUsers(): IUser[] {
+  public getUsers() {
     return this.users;
   }
 }
