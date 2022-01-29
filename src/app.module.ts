@@ -5,7 +5,7 @@ import { UsersModule } from './users/users.module';
 import { AuthCheckingMiddleware } from './shared/middleware/auth-checking.middleware';
 import { ResponseWrapperInterceptor } from './shared/interceptors/response/response-wrapper.interceptor';
 import { ROUTE_PREFIX } from './shared/constants/routes';
-import { UsersRoutes } from './users/users.routes';
+import { AuthRoutes } from './auth/auth.routes';
 
 @Module({
   imports: [UsersModule],
@@ -21,7 +21,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthCheckingMiddleware)
-      .exclude(`${ROUTE_PREFIX}/${UsersRoutes.Authorization}/(.*)`)
+      .exclude(`${ROUTE_PREFIX}/${AuthRoutes.Main}/(.*)`)
       .forRoutes('');
   }
 }
