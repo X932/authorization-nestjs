@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { IUser } from './auth.model';
+import { AuthenticationDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
-  private users: IUser[] = [];
+  private users: AuthenticationDto[] = [];
 
-  public signUp(user: IUser) {
+  public signUp(user: AuthenticationDto) {
     this.users.push(user);
   }
 
