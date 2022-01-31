@@ -2,14 +2,19 @@ import { IsEmail, IsString } from 'class-validator';
 
 export class AuthenticationDto {
   @IsString()
-  userName: string;
+  name: string;
 
   @IsEmail()
   email: string;
 
   @IsString()
   password: string;
+}
+
+export class AuthorizationDto {
+  @IsEmail()
+  email: string;
 
   @IsString()
-  repeatPassword: string;
+  password: string;
 }
