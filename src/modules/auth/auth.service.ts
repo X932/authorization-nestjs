@@ -27,22 +27,18 @@ export class AuthService {
   }
 
   public async signUp(user: User): Promise<UserEntity> {
-    try {
-      const hash: string = await this.getHashByEmail(user.email);
-      if (hash) {
-        throw badRequest();
-      }
-
-      const hashedPassword: string = await this.hashPassword(user.password);
-      const row: User = {
-        ...user,
-        password: hashedPassword,
-      };
-
-      return this.usersRepository.save(row);
-    } catch (error) {
-      // insert to log(user.email);
+    const hash: string = await this.getHashByEmail(user.email);
+    if (hash) {
+      throw badRequest();
     }
+
+    const hashedPassword: string = await this.hashPassword(user.password);
+    const row: User = {
+      ...user,
+      password: hashedPassword,
+    };
+
+    return await this.usersRepository.save(row);
   }
 
   private async comparePassword(

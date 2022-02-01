@@ -1,14 +1,11 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { ResponseWrapperInterceptor } from './shared/interceptors/response/response-wrapper.interceptor';
-import { ROUTE_PREFIX } from './shared/constants/routes';
-import { AuthCheckingMiddleware } from './shared/middleware/auth-checking.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
-import { AuthRoutes } from './modules/auth/auth.routes';
 
 @Module({
   imports: [
@@ -34,11 +31,4 @@ import { AuthRoutes } from './modules/auth/auth.routes';
     },
   ],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthCheckingMiddleware)
-      .exclude(`${ROUTE_PREFIX}/${AuthRoutes.Main}(.*)`)
-      .forRoutes('');
-  }
-}
+export class AppModule {}
