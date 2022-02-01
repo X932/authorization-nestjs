@@ -16,7 +16,4 @@ export class UserEntity {
 
   @Column({ default: '' })
   password: string;
-
-  @Column({ default: '' })
-  token: string;
 }
