@@ -21,14 +21,17 @@ export class AuthService {
     return hash;
   }
 
-  private createJwt(userName: string): string {
-    const payload = { sub: userName };
+  private createJwt(userRole: string): string {
+    const payload = { sub: userRole };
     return this.jwtService.sign(payload);
   }
 
   public async signUp(user: User): Promise<UserEntity> {
-    const hash: string = await this.getHashByEmail(user.email);
-    if (hash) {
+    const userEntity: UserEntity | null = await this.getUserEntityByEmail(
+      user.email,
+    );
+
+    if (userEntity) {
       throw badRequest();
     }
 
@@ -48,25 +51,32 @@ export class AuthService {
     return await bcrypt.compare(password, hash);
   }
 
-  private async getHashByEmail(email: string): Promise<string> {
+  private async getUserEntityByEmail(
+    email: string,
+  ): Promise<UserEntity | null> {
     const user: UserEntity = await this.usersRepository.findOne({ email });
     if (user) {
-      return user.password;
+      return user;
     }
-    return '';
+    return null;
   }
 
   public async signIn(user: AuthorizationDto): Promise<string> {
-    const hash: string = await this.getHashByEmail(user.email);
+    const userEntity: UserEntity | null = await this.getUserEntityByEmail(
+      user.email,
+    );
 
-    if (!hash) {
+    if (!userEntity) {
       throw badRequest();
     }
 
-    const isPasswordValid = await this.comparePassword(user.password, hash);
+    const isPasswordValid = await this.comparePassword(
+      user.password,
+      userEntity.password,
+    );
     if (isPasswordValid) {
       const salt = await bcrypt.genSalt();
-      return this.createJwt(salt);
+      return this.createJwt(userEntity.role);
     }
 
     throw badRequest();
