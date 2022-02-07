@@ -5,7 +5,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { JWT_KEY } from '../../shared/constants/jwt-key';
-import { UserEntity } from '../users/users.entity';
+import { UserEntity } from '../users/models/user.entity';
 
 @Module({
   imports: [

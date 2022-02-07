@@ -3,7 +3,7 @@ import { AuthenticationDto, AuthorizationDto } from './models/auth.dto';
 import { AuthRoutes } from './auth.routes';
 import { AuthService } from './auth.service';
 import { User } from './models/user.model';
-import { UserEntity } from '../users/users.entity';
+import { UserEntity } from '../users/models/user.entity';
 
 @Controller(AuthRoutes.Main)
 export class AuthController {
