@@ -21,8 +21,8 @@ export class AuthService {
     return hash;
   }
 
-  private createJwt(userRole: string): string {
-    const payload = { sub: userRole };
+  private createJwt(user: UserEntity): string {
+    const payload = { sub: user.id };
     return this.jwtService.sign(payload);
   }
 
@@ -76,7 +76,7 @@ export class AuthService {
     );
     if (isPasswordValid) {
       const salt = await bcrypt.genSalt();
-      return this.createJwt(userEntity.role);
+      return this.createJwt(userEntity);
     }
 
     throw badRequest();

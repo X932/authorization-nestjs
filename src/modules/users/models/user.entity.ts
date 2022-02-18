@@ -4,10 +4,6 @@ import { GroupUserEntity } from './groupUser.entity';
 @Entity('users')
 export class UserEntity {
   @PrimaryGeneratedColumn()
-  @OneToMany(
-    () => GroupUserEntity,
-    (groupUser: GroupUserEntity) => groupUser.user,
-  )
   id: string;
 
   @Column({ default: '' })
@@ -21,4 +17,10 @@ export class UserEntity {
 
   @Column({ default: '' })
   password: string;
+
+  @OneToMany(
+    () => GroupUserEntity,
+    (groupUser: GroupUserEntity) => groupUser.user,
+  )
+  groupUser: GroupUserEntity[];
 }

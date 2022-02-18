@@ -4,12 +4,14 @@ import { GroupUserEntity } from './groupUser.entity';
 @Entity('group')
 export class GroupEntity {
   @PrimaryGeneratedColumn()
-  @OneToMany(
-    () => GroupUserEntity,
-    (groupUser: GroupUserEntity) => groupUser.group,
-  )
   id: string;
 
   @Column()
   name: string;
+
+  @OneToMany(
+    () => GroupUserEntity,
+    (groupUser: GroupUserEntity) => groupUser.group,
+  )
+  groupUser: GroupUserEntity[];
 }

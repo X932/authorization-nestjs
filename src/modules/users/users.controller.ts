@@ -12,6 +12,6 @@ export class UsersController {
 
   @Get(':id')
   getUsersByGroup(@Param('id') id: string): Observable<GroupUserEntity[]> {
-    return this.usersService.getUsers(id);
+    return this.usersService.getUsersByGroupId(id);
   }
 }

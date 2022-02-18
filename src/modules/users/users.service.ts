@@ -11,27 +11,12 @@ export class UsersService {
     private groupUserRepository: Repository<GroupUserEntity>,
   ) {}
 
-  public getUsers(groupId: string): Observable<GroupUserEntity[]> {
+  public getUsersByGroupId(groupId: string): Observable<GroupUserEntity[]> {
     return from(
-      this.groupUserRepository
-        .createQueryBuilder('group_user')
-        .innerJoinAndSelect(
-          'group_user.user',
-          'user',
-          'group_user.group = :id',
-          {
-            id: groupId,
-          },
-        )
-        .innerJoinAndSelect(
-          'group_user.group',
-          'group',
-          'group_user.group = :id',
-          {
-            id: groupId,
-          },
-        )
-        .getMany(),
+      this.groupUserRepository.find({
+        where: { group: { id: groupId } },
+        relations: ['user'],
+      }),
     );
   }
 }

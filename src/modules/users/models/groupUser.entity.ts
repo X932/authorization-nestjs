@@ -7,11 +7,11 @@ export class GroupUserEntity {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @ManyToOne(() => UserEntity, (user: UserEntity) => user.id)
+  @ManyToOne(() => UserEntity, (user: UserEntity) => user.groupUser)
   @JoinColumn()
-  user: string;
+  user: UserEntity;
 
   @ManyToOne(() => GroupEntity, (group: GroupEntity) => group.id)
   @JoinColumn()
-  group: number;
+  group: GroupEntity;
 }
